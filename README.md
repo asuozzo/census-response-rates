@@ -10,9 +10,11 @@ Create your virtual environment by running `pipenv install`. *If you do not have
 
 Once that's installed, run `pipenv shell` to enter the virtual environment.
 
-Edit the `STATE_FIPS` variable in the `etl/get_response_rates.py` file to reflect the state you want data for (I have it set to "50", which is Vermont). That script will download response rate numbers for the U.S., every state, and all counties and county subdivisions within the state you specify.
+Edit the `STATE_FIPS` variable in the `etl/get_response_rates.py` file to the two-digit FIPS code for the state you want data for (I have it set to "50", which is Vermont). That script will download response rate numbers for the U.S., every state, and all counties and county subdivisions within the state you specify.
 
 Download the data by running `python etl/get_response_rates.py`. This will save the data to a file with the response date appended; if you run this on multiple days or put it on a cron job, you'll get a file for each day and you can do some change-over-time analysis.
+
+*Note: Data at the county subdivision level appears to be unavailable for some states. If that is the case, you'll get a message on the command line and your response rates csv will not contain town-level data.*
 
 Then run `jupyter lab` and open the `analysis/analyze_response_rates.ipynb` file. This will let you dig into the numbers you just downloaded.
 
