@@ -2,7 +2,8 @@
 
 .ipynb_checkpoints
 
-data/
+data/source/*
+data/processed/*
 !data/source/.gitkeep
 !data/processed/.gitkeep
 
