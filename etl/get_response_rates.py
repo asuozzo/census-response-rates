@@ -14,10 +14,14 @@ def get_response_rate(geog_for, geog_in=None):
         params["in"] = geog_in
     
     r = requests.get("https://api.census.gov/data/2020/dec/responserate", params=params)
-    data = r.json()
-    rr = pd.DataFrame(data[1:],columns=data[0])
-    
-    return rr
+    try:
+        data = r.json()
+        rr = pd.DataFrame(data[1:],columns=data[0])
+        
+        return rr
+    except Exception as e:
+        print("API returned no data for {0} {1}".format(geog_for, geog_in))
+        return pd.DataFrame()
 
 
 if __name__=="__main__":
